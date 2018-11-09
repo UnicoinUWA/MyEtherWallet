@@ -64,7 +64,7 @@
     "sass-loader": "^7.0.1",
     "secp256k1": "^3.5.2",
     "store": "^2.0.12",
-    "stylelint": "^9.6.0",
+    "stylelint": "^9.8.0",
     "stylelint-config-prettier": "^4.0.0",
     "stylelint-config-standard": "^18.2.0",
     "unused-files-webpack-plugin": "^3.4.0",
