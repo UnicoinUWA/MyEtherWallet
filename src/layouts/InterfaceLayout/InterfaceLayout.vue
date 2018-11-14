@@ -1,6 +1,5 @@
 <template>
   <div
-    v-if="wallet !== null"
     class="send-eth-and-tokens">
     <div class="wrap">
       <div class="side-nav">
@@ -32,17 +31,12 @@
       </div>
     </div>
   </div>
-  <div v-else>
-    <wallet-not-found-container/>
-  </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
 import { parseTokensHex } from '@/helpers';
 import ENS from 'ethereum-ens';
-
-import WalletNotFoundContainer from './containers/WalletNotFoundContainer';
 
 import InterfaceAddress from './components/InterfaceAddress';
 import InterfaceBalance from './components/InterfaceBalance';
@@ -60,8 +54,7 @@ export default {
     'interface-address': InterfaceAddress,
     'interface-balance': InterfaceBalance,
     'interface-network': InterfaceNetwork,
-    'interface-tokens': InterfaceTokens,
-    'wallet-not-found-container': WalletNotFoundContainer
+    'interface-tokens': InterfaceTokens
   },
   data() {
     return {
