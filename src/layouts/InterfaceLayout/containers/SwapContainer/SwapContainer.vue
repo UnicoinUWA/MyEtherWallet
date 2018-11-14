@@ -165,6 +165,9 @@ export default {
       ]
     };
   },
+  mounted() {
+    //this.$children[1].$refs.confirmation.show();
+  },
   methods: {
     swapConfirmationModalOpen() {
       this.$refs.swapConfirmation.$refs.swapconfirmation.show();

@@ -69,21 +69,16 @@ export default {
     }
   },
   data() {
-    const parsedRaw = new Object(this.rawTx);
     return {
-      signedTx: parsedRaw.rawTransaction,
       readTx: {}
     };
   },
   computed: {
-    ...mapGetters({ web3: 'web3' })
-  },
-  watch: {
-    rawTx(newVal) {
-      this.signedTx = JSON.parse(newVal).rawTransaction;
-    },
-    readTx(newVal) {
-      this.signedTx = newVal.rawTransaction;
+    ...mapGetters({ web3: 'web3' }),
+    signedTx() {
+      return this.readTx.hasOwnProperty('rawTransaction')
+        ? this.readTx.rawTransaction
+        : JSON.parse(this.rawTx).rawTransaction;
     }
   },
   methods: {

@@ -1,6 +1,7 @@
 <template>
   <div class="header">
-
+    <settingsmodal />
+    <logoutmodal />
     <div
       :class="isPageOnTop == false ? 'active' : ''"
       class="scrollup-container">
@@ -65,9 +66,7 @@
                     </b-dropdown-item>
                   </b-nav-item-dropdown>
                 </div>
-                <notification
-                  v-if="wallet !== null"
-                  ref="notification"/>
+                <notification v-if="wallet !== null"/>
                 <b-nav-item
                   v-if="wallet === null && $route.fullPath === '/'"
                   :class="isPageOnTop == true ? 'noshow' : ''"
@@ -88,6 +87,9 @@
                       width="35px"
                       height="35px"/>
                   </template>
+                  <b-dropdown-item @click="openSettings">
+                    Settings
+                  </b-dropdown-item>
                   <b-dropdown-item @click="logout">
                     Log out
                   </b-dropdown-item>
@@ -107,6 +109,7 @@
         </div>
       </div>
     </div>
+
   </div>
 </template>
 
@@ -117,12 +120,18 @@ import { Misc } from '@/helpers';
 import Blockie from '@/components/Blockie';
 import Notification from '@/components/Notification';
 import ScrollUpButton from '@/components/ScrollUpButton';
+import SettingsModal from '@/components/SettingsModal';
+import TxTopMenuPopup from '@/components/TxTopMenuPopup';
+import LogoutModal from '@/components/LogoutModal';
 
 export default {
   components: {
     blockie: Blockie,
     notification: Notification,
-    scrollupbutton: ScrollUpButton
+    scrollupbutton: ScrollUpButton,
+    settingsmodal: SettingsModal,
+    txpoppup: TxTopMenuPopup,
+    logoutmodal: LogoutModal
   },
   data() {
     return {
@@ -194,6 +203,9 @@ export default {
     };
   },
   methods: {
+    openSettings() {
+      this.$children[0].$refs.settings.show();
+    },
     languageItemClicked(e) {
       const flag = e.target.getAttribute('data-flag-name');
 
@@ -206,8 +218,9 @@ export default {
       window.scrollTo(0, 0);
     },
     logout() {
-      this.$store.dispatch('clearWallet');
-      this.$router.push('/');
+      this.$children[2].$refs.logout.show();
+      //this.$store.dispatch('clearWallet');
+      //this.$router.push('/');
     },
     showNotifications() {
       this.$refs.notification.$refs.notification.show();
